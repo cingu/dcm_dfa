@@ -40,7 +40,7 @@ import java.util.Map;
  * @author cindy.nguyen
  */
 public class Authorization {
-  private static final String PATH_TO_CLIENT_SECRETS = "C:\\Users\\cindy.nguyen\\Desktop\\dcm_dfa_API\\client_secret_743688820873-52ceke2rd6c4ca9dnnmq2avgh3d7ucu6.apps.googleusercontent.com.json";
+  private static final String PATH_TO_CLIENT_SECRETS = "";
 
   // Location where authorization credentials will be cached.
   private static final java.io.File DATA_STORE_DIR =
@@ -98,28 +98,7 @@ public class Authorization {
     // application. Suggested format is "MyCompany-ProductName/Version.MinorVersion".
     Dfareporting reporting =
         new Dfareporting.Builder(credential.getTransport(), credential.getJsonFactory(), credential)
-            .setApplicationName("dfareporting-groupm")
-            .build();
-    
-    
-    //Creation.setUpPlacementsFromIO(reporting, 20169557, "/Users/cindy.nguyen/Desktop/DCM/test.xlsx");    
-      //com.mycompany.dcm_dfa.Creations.Placement.newPlacement("testeren", 20169557, 2068252, 120, 600, reporting, 0, 0, null, "");
-      //com.mycompany.dcm_dfa.Creations.MyPlacement.setUpPlacementsFromIO(reporting, 20169557, "/Users/cindy.nguyen/Desktop/DCM/test.xlsx");
-    /*Creation.createPlacement(PATH_TO_CLIENT_SECRETS, 0, 0, 0, 0, reporting, 0, 0);  
-    Creation.createPlacement("XSG-116 160x600 Trade Signals SA Easier UF AU EN (Xaxis)", 20210631 , 2068252, 160, 600, reporting, 0, 0);
-    Creation.createPlacement("XSG-116 300x600 Trade Signals SA Easier UF AU EN (Xaxis)", 20210631 , 2068252, 300, 600, reporting, 0, 0);
-    Creation.createPlacement("XSG-116 300x250 Trade Signals SA Easier UF AU EN (Xaxis)", 20210631 , 2068252, 300, 250, reporting, 0, 0);
-    Creation.createPlacement("XSG-116 728x90 Trade Signals SA Easier UF AU EN (Xaxis)", 20210631 , 2068252, 728, 90, reporting, 0, 0);*/
-    //Creation.createPlacement("", 20169557, 1015597, 728, 90, reporting, (long) 1.5, (long) 9.48, "");
-    //Reporting.runExample(reporting);
-    //Creation.setUpAdsFromIO(reporting, "/Users/cindy.nguyen/Desktop/DCM/placementTest.xlsx");
-    //Reporting.runExample(reporting);
-    //Ad.newAd(reporting, "tester", 20169557 , 77640346, 204431113, "");
-    //Ad.setUpAdsFromIO(reporting, "/Users/cindy.nguyen/Desktop/DCM/adTest.xlsx");
-    //Reporting.tæææst(reporting);
-    //Reporting.generateCreativeOverview(reporting);
-    MyPlacement.newPlacement("tæsteren", 20169557, 3367768, 160, 600, reporting, 100, 10, null, "CPM", 20, 9, 2017);
-//System.out.println(MyCreation.setEndDate(31, 12, 2018));
-    
+            .setApplicationName("dfareporting")
+            .build();           
   }
 }
