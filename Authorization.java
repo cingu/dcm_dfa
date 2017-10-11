@@ -26,6 +26,7 @@ import com.google.api.services.dfareporting.model.Placement;
 import com.google.api.services.drive.DriveScopes;
 import com.google.common.collect.ImmutableSet;
 import com.mycompany.dcm_dfa.Creations.MyAd;
+import com.mycompany.dcm_dfa.Creations.MyCreative;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -118,7 +119,9 @@ public class Authorization {
     //Ad.setUpAdsFromIO(reporting, "/Users/cindy.nguyen/Desktop/DCM/adTest.xlsx");
     //Reporting.tæææst(reporting);
     //Reporting.generateCreativeOverview(reporting);
-    MyPlacement.newPlacement("tæsteren", 20169557, 3367768, 160, 600, reporting, 100, 10, null, "CPM", 20, 9, 2017);
+    //MyPlacement.newPlacement("addValuetæst", 20169557, 3367768, 160, 600, reporting, 100, 10, "country=ee;language=en", "CPM", 19, 10, 2017);
+    //MyPlacement.setUpPlacementsFromIO(reporting, 20169557, "/Users/cindy.nguyen/Desktop/DCM/test+customValues.xlsx");
+      MyCreative.updateClickTagsForCreatives(reporting, "/Users/cindy.nguyen/Desktop/DCM/Creative Ids for clicktag update.xlsx");
 //System.out.println(MyCreation.setEndDate(31, 12, 2018));
     
   }
