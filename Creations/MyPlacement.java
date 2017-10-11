@@ -95,7 +95,7 @@ public class MyPlacement {
         ts.setAdditionalKeyValues(additionalKeyValues);
         placement.setTagSetting(ts);
                 
-        //pricingSchedule.setPricing
+        //pricingSchedule.setPricing      
         
         try {        
             com.google.api.services.dfareporting.model.Placement result = rep.placements().insert(SAXO_PROFILE_ID, placement).execute();
@@ -129,15 +129,16 @@ public class MyPlacement {
       return 0;
     }
     
-    public static void setUpPlacementsFromIO(Dfareporting rep, long campId, String theFilePath){
+    public static void setUpPlacementsFromIO(Dfareporting rep, long campId1, String theFilePath){
         //Get values from IO
         String filePath = theFilePath;
         FileInputStream fis = null;
-        String site = null, placementName = null, costStructure = null, pricingType = null; //sitename hashmap
+        String site = null, placementName = null, costStructure = null, pricingType = null, additionalValues = null;//sitename hashmap
         int width = 0, height = 0; 
-        long unit = 0, rateOrCost = 0, siteId = 0;    
+        long unit = 0, rateOrCost = 0, siteId = 0, campId = 0;    
         int rateOrCostIndex = 0;
-        boolean siteCheck = false, placCheck = false, widthHeightCheck = false, priceCheck = false, unitCheck = false, rateOrCostCheck = false;
+        boolean siteCheck = false, placCheck = false, widthHeightCheck = false, addValuesCheck = false,
+                priceCheck = false, unitCheck = false, rateOrCostCheck = false, campCheck = false;
         
         try {
 
@@ -170,31 +171,43 @@ public class MyPlacement {
                                 site = cellValue;
                                 siteId = siteNameIds.get(site);  
                                 siteCheck = true;
-                                System.out.println(siteCheck);
-                            } else if (cell.getColumnIndex() == 6 && !cellValue.equals("Placement Name")){
-                                placementName = cellValue;
-                                placCheck = true;
+                                System.out.println("site");                            
                             } else if (cell.getColumnIndex() == 1 && !cellValue.equals("Banner size")){
                                 String [] format = cellValue.split("x");
                                 width = Integer.valueOf(format[0]);
                                 height = Integer.valueOf(format[1]);
                                 widthHeightCheck = true;
-                            } else if (cell.getColumnIndex() == 7 && !cellValue.equals("Cost Structure")){
+                                System.out.println("widthHeight");
+                            } else if (cell.getColumnIndex() == 2 && !cellValue.equals("Placement Name")){
+                                placementName = cellValue;
+                                placCheck = true;
+                                System.out.println("placement");
+                            } else if  (cell.getColumnIndex() == 3 && !cellValue.equals("Additional values")){
+                                additionalValues = cellValue;
+                                addValuesCheck = true;
+                                System.out.println(additionalValues);
+                            } else if (cell.getColumnIndex() == 4 && !cellValue.equals("Cost Structure")){
                                 pricingType = cellValue;
                                 priceCheck = true;
-                                if (pricingType.equals("CPM")){rateOrCostIndex = 9; System.out.println("9");}
-                                else if (pricingType.equals("Flat Rate - Impressions")){rateOrCostIndex = 11; System.out.println("11");}
-                            }                          
+                                if (pricingType.equals("CPM")){rateOrCostIndex = 6;}
+                                else if (pricingType.equals("Flat Rate - Impressions")){rateOrCostIndex = 8;}
+                                System.out.println("pricingtype");
+                            }                      
                         } else if (Cell.CELL_TYPE_NUMERIC == cell.getCellType()){
-                            double cellValue2 = cell.getNumericCellValue();
-                            if (cell.getColumnIndex() == 8 && cell.getRowIndex()!=0){
-                                unit = (long)cellValue2;
+                            long cellValue2 = (long) cell.getNumericCellValue();
+                            if (cell.getColumnIndex() == 5 && cell.getRowIndex()!=0){
+                                unit = cellValue2;
                                 unitCheck = true;
+                                System.out.println("unit");
                             } else if (cell.getColumnIndex() == rateOrCostIndex && cell.getRowIndex()!=0){
-                                rateOrCost = (long)cellValue2; 
+                                rateOrCost = cellValue2; 
                                 rateOrCostCheck = true;
                                 System.out.println(rateOrCost + "w");
-                            } 
+                            }  else if (cell.getColumnIndex() == 10 && cell.getRowIndex()!=0){
+                                campId = cellValue2;
+                                campCheck = true;
+                                System.out.println(campId);
+                            }    
                             
                         /*String cellValue = cell.getStringCellValue();
                         if (cell.getColumnIndex() == 0 && !cellValue.equals("Site Name (URL)")) {
@@ -209,15 +222,17 @@ public class MyPlacement {
                         }                                      */     
                         }
                     } //site!=null || placementName!=null
-                    if(siteCheck && placCheck && widthHeightCheck && priceCheck && unitCheck && rateOrCostCheck){
-                        //newPlacement(placementName, campId, siteId, width, height, rep, unit, rateOrCost, null, pricingType);
+                    if(siteCheck && placCheck && widthHeightCheck && priceCheck && unitCheck && rateOrCostCheck && addValuesCheck && campCheck){
+                        newPlacement(placementName, campId1, siteId, width, height, rep, unit, rateOrCost, additionalValues, pricingType, 31, 12, 2017);
                         System.out.println("ok");
                         siteCheck = false;
                         placCheck = false;
+                        addValuesCheck = false;
                         widthHeightCheck = false;
                         priceCheck = false;
                         unitCheck = false;
                         rateOrCostCheck = false;
+                        campCheck = false;
                         System.out.println("false check");
                         //createPlacement(placementName, campId, siteId, height, width, rep);
                         //System.out.println(placementName+" "+height+"x"+width);
