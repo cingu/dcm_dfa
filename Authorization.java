@@ -99,6 +99,7 @@ public class Authorization {
     // application. Suggested format is "MyCompany-ProductName/Version.MinorVersion".
     Dfareporting reporting =
         new Dfareporting.Builder(credential.getTransport(), credential.getJsonFactory(), credential)
+<<<<<<< HEAD
             .setApplicationName("dfareporting-groupm")
             .build();
     
@@ -124,5 +125,9 @@ public class Authorization {
       MyCreative.updateClickTagsForCreatives(reporting, "/Users/cindy.nguyen/Desktop/DCM/Creative Ids for clicktag update.xlsx");
 //System.out.println(MyCreation.setEndDate(31, 12, 2018));
     
+=======
+            .setApplicationName("dfareporting")
+            .build();           
+>>>>>>> c527454bbdd70943c7b811b9bddb37a4bb4c28d6
   }
 }
