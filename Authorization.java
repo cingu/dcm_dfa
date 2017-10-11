@@ -41,7 +41,7 @@ import java.util.Map;
  * @author cindy.nguyen
  */
 public class Authorization {
-  private static final String PATH_TO_CLIENT_SECRETS = "C:\\Users\\cindy.nguyen\\Desktop\\dcm_dfa_API\\client_secret_743688820873-52ceke2rd6c4ca9dnnmq2avgh3d7ucu6.apps.googleusercontent.com.json";
+  private static final String PATH_TO_CLIENT_SECRETS = "";
 
   // Location where authorization credentials will be cached.
   private static final java.io.File DATA_STORE_DIR =
